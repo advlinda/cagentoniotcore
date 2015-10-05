@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -18,13 +18,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -69,6 +69,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>mincore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -108,9 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Platform\Windows\common.c" />
+    <ClCompile Include="..\..\Platform\Windows\NamedPipeClient.c" />
+    <ClCompile Include="..\..\Platform\Windows\NamedPipeServer.c" />
     <ClCompile Include="..\..\Platform\Windows\network.c" />
     <ClCompile Include="..\..\Platform\Windows\platform.c" />
     <ClCompile Include="dynamicloader.c" />
+    <ClCompile Include="Keepalive.c" />
     <ClCompile Include="SAManager.c" />
     <ClCompile Include="SAParser.c" />
     <ClCompile Include="topic.c" />
@@ -120,9 +124,13 @@
     <ClInclude Include="..\..\Include\susiaccess_handler_mgmt.h" />
     <ClInclude Include="..\..\Include\svnversion.h" />
     <ClInclude Include="..\..\Platform\Windows\common.h" />
+    <ClInclude Include="..\..\Platform\Windows\IPCCommData.h" />
+    <ClInclude Include="..\..\Platform\Windows\NamedPipeClient.h" />
+    <ClInclude Include="..\..\Platform\Windows\NamedPipeServer.h" />
     <ClInclude Include="..\..\Platform\Windows\network.h" />
     <ClInclude Include="..\..\Platform\Windows\platform.h" />
     <ClInclude Include="dynamicloader.h" />
+    <ClInclude Include="Keepalive.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SAManager.h" />
     <ClInclude Include="SAManagerLog.h" />

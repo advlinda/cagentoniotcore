@@ -33,9 +33,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	memset(&config, 0 , sizeof(susiaccess_agent_conf_body_t));
 	strcpy(config.runMode,"remote");
 	strcpy(config.autoStart,"True");
-	strcpy(config.serverIP,"www.susiaccess.com");
-	strcpy(config.serverPort,"10001");
-	strcpy(config.serverAuth,"F0PE1/aaU8o=");
+	strcpy(config.serverIP,"adv-wisecloud.cloudapp.net");
+	strcpy(config.serverPort,"1883");
+	strcpy(config.serverAuth,"fENl4B7tnuwpIbs61I5xJQ==");
 	config.tlstype = tls_type_none;
 	switch(config.tlstype)
 	{

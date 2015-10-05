@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <XMLConfigSettings><BaseSettings>
-<ModuleNum>1</ModuleNum>
+<ModuleNum>2</ModuleNum>
 <ModuleName1>SampleHandler</ModuleName1><ModulePath1>\module\SampleHandler.dll</ModulePath1><ModuleEnable1>TRUE</ModuleEnable1>
+<ModuleName2>ProcessMonitorHandler</ModuleName2><ModulePath2>\module\ProcessMonitorHandler.dll</ModulePath2><ModuleEnable2>TRUE</ModuleEnable2>
 </BaseSettings></XMLConfigSettings>

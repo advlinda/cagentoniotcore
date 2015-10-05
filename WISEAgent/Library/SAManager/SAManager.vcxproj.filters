@@ -45,6 +45,15 @@
     <ClCompile Include="..\..\Platform\Windows\platform.c">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Keepalive.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Platform\Windows\NamedPipeClient.c">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Platform\Windows\NamedPipeServer.c">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dynamicloader.h">
@@ -84,6 +93,18 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Platform\Windows\platform.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Keepalive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Platform\Windows\IPCCommData.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Platform\Windows\NamedPipeClient.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Platform\Windows\NamedPipeServer.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>

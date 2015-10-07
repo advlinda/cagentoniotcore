@@ -52,7 +52,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		break;
 	case tls_type_psk:
 		{
-			strcpy(config.psk, "");
+			strcpy(config.psk, "05155853");
 			strcpy(config.identity, "SAClientSample");
 			strcpy(config.ciphers, "");
 		}
@@ -62,9 +62,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	memset(&profile, 0 , sizeof(susiaccess_agent_profile_body_t));
 	sprintf_s(profile.version, DEF_VERSION_LENGTH, "%d.%d.%d.%d", 3, 1, 0, 0);
 	strcpy(profile.hostname,"SAClientSample");
-	strcpy(profile.devId,"000014DAE996BE04");
-	strcpy(profile.sn,"14DAE996BE04");
-	strcpy(profile.mac,"14DAE996BE04");
+	strcpy(profile.devId,"000014DAE996BE03");
+	strcpy(profile.sn,"14DAE996BE03");
+	strcpy(profile.mac,"14DAE996BE03");
 	strcpy(profile.type,"IPC");
 	strcpy(profile.product,"Sample Agent");
 	strcpy(profile.manufacture,"test");
@@ -74,7 +74,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	strcpy(profile.processorname,"NA");
 	strcpy(profile.osarchitect,"NA");
 	profile.totalmemsize = 40832;
-	strcpy(profile.maclist,"14DAE996BE04");
+	strcpy(profile.maclist,"14DAE996BE03");
 	strcpy(profile.localip,"172.22.12.21");
 	strcpy(profile.account,"anonymous");
 	strcpy(profile.passwd,"");

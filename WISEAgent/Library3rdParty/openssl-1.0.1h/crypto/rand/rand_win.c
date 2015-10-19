@@ -109,6 +109,12 @@
  *
  */
 
+
+#if defined(WIN_IOT)
+#define _CRT_RAND_S
+#include <stdlib.h>
+#endif
+
 #include "cryptlib.h"
 #include <openssl/rand.h>
 #include "rand_lcl.h"
@@ -617,7 +623,18 @@ int RAND_poll(void)
 	readtimer();
 	
 	/* memory usage statistics */
+#if defined(WIN_IOT)
+  {
+    unsigned char* seed = (unsigned char*)&m;
+    for (int i = 0; i < sizeof(m); i += sizeof(unsigned int)) {
+      unsigned int number;
+      rand_s(&number);
+      *((unsigned int*)(&seed[i])) = number;    
+    }
+  }
+#else
 	GlobalMemoryStatus(&m);
+#endif
 	RAND_add(&m, sizeof(m), 1);
 
 	/* process ID */
@@ -737,7 +754,18 @@ static void readtimer(void)
 
 static void readscreen(void)
 {
-#if !defined(OPENSSL_SYS_WINCE) && !defined(OPENSSL_SYS_WIN32_CYGWIN)
+#if defined(WIN_IOT)
+  unsigned char md[MD_DIGEST_LENGTH + sizeof(unsigned int)];
+	
+  for (int i = 0; i < MD_DIGEST_LENGTH; i += sizeof(unsigned int)) {
+	unsigned int number;
+    rand_s(&number);
+    *((unsigned int*)(&md[i])) = number;
+  }
+	
+	/* Seed the random generator with the hash value */
+  RAND_add(md, MD_DIGEST_LENGTH, 0);
+#elif !defined(OPENSSL_SYS_WINCE) && !defined(OPENSSL_SYS_WIN32_CYGWIN)
   HDC		hScrDC;		/* screen DC */
   HDC		hMemDC;		/* memory DC */
   HBITMAP	hBitmap;	/* handle for our bitmap */

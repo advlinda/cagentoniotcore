@@ -782,7 +782,25 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason,
 #define alloca _alloca
 #endif
 
-#if defined(_WIN32_WINNT) && _WIN32_WINNT>=0x0333
+#if defined(WIN_IOT)
+int OPENSSL_isservice(void)
+{
+  static union { void *p; int (*f)(void); } _OPENSSL_isservice = { NULL };
+
+    if (_OPENSSL_isservice.p == NULL) {
+	HANDLE h = GetModuleHandle(NULL);
+	if (h != NULL)
+	    _OPENSSL_isservice.p = GetProcAddress(h,"_OPENSSL_isservice");
+	if (_OPENSSL_isservice.p == NULL)
+	    _OPENSSL_isservice.p = (void *)-1;
+    }
+
+    if (_OPENSSL_isservice.p != (void *)-1)
+	return (*_OPENSSL_isservice.f)();
+
+    return -1;
+}
+#elif defined(_WIN32_WINNT) && _WIN32_WINNT>=0x0333
 int OPENSSL_isservice(void)
 { HWINSTA h;
   DWORD len;

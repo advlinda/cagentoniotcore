@@ -1,0 +1,103 @@
+ 
+ Instructions for building for Windows IoTCore
+ ----------------------------------
+ 
+ Softwares to be prepared
+ ------------------------
+ 
+ 1. Install ActiveState Perl at: http://www.activestate.com/ActivePerl
+  - Download x86 version, if you wish for a 32-bit binary
+  - Download x64 version, if you wish for a 64-bit binary
+
+ 2. Install Netwide Assembler: http://nasm.sourceforge.net/
+  - Installer can be downloaded at http://www.nasm.us/pub/nasm/releasebuilds/(newest_version)/win32/
+  (Note: Modify (newest_version) as the version of newest.)
+
+ Build with Visual Studio 2015
+ ------------------------
+ 
+ 1. Run a VS2015 x86 Native Tools Command Prompt
+
+ 2. Set environment variables
+	
+   * You can also execute the environment setting file, IoT-Vars.cmd,
+     under the diectory of openssl-1.0.1h.winiotcore, instead doing a, b, and c step.
+   
+   (a) setup INCLUDE as VC++\Windows\Windows IoT Core
+
+     > set INCLUDE=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include;
+       C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include;
+       C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;
+       C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\um;
+       C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\shared;
+       C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\winrt;
+       C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6\Include\um
+   
+	   * Note: the above path can be found in the property of project of 
+	   "Blank Windows IoT Core Console Application", and the target platform version 
+	   of the project is 10.0.10240.0. You can find the paths by doing following things:
+	   (i)  Open the Property page of the project: VC++ directories -> Include directories -> Edit
+	   (ii) You shall found them in the Evaluated value box. If the target platform version is 
+	        changed, the path should be changed as well.
+
+    (b) setup LIB as VC++\Windows\Windows IoT Core
+	
+     > set LIB=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\onecore;
+       C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\um\x86;
+       C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6\lib\um\x86;
+       C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86
+   
+	   * Note: the above path can be found in the property of project of 
+	   "Blank Windows IoT Core Console Application", and the target platform version 
+	   of the project is 10.0.10240.0. You can find the paths by doing following things:
+	   (i)  Open the Property page of the project: VC++ directories -> Library directories -> Edit
+	   (ii) You shall found them in the Evaluated value box. If the target platform version is 
+	        changed, the path should be changed as well.
+		 
+    (c) setup PATH to add NASM & Perl
+     > set PATH=%LOCALAPPDATA%\nasm;
+       C:\Perl\site\bin;
+	   C:\Perl\bin;
+	   C:\Perl64\site\bin;
+	   C:\Perl64\bin;
+	   %PATH%
+	
+	   * Note: If only 32-bit binary is needed, path for Perl64 can be ignored.
+
+ 3. Navigate to the directory of the source code of OpenSSL
+
+ 4. Set configurations
+
+     > perl Configure VC-WIN32 --prefix=YOUR_OUTPUT_DIRECTORY_PATH
+
+ 5. Create makefile
+
+     > ms\do_nasm
+
+ 6. Modify ms\ntdll.mak
+
+  - Link the library onecoreuap.lib winsysstub.lib 
+   (Remove ws2_32.lib gdi32.lib advapi32.lib crypt32.lib user32.lib etc.)
+  - Add -DWIN_IOT into CFLAG
+  - Add libpath:/libpath:"../winsysstub.winiotcore/VC2015/bin/"
+ 
+  For example:
+		CFLAG= /MD /Ox /O2 /Ob2 -DWIN_IOT ...
+		EX_LIBS=onecoreuap.lib winsysstub.lib
+		MLFLAGS= ... /opt:ref /debug /dll /libpath:"../winsysstub.winiotcore/VC2015/bin/"
+
+ 7. Build the whole project
+
+     > nmake -f ms\ntdll.mak
+  
+ 8. There might be link errors in the building result
+
+    (a) A link error related with setargv.obj
+		- It can be ignored, it is a library for testing application only.
+		- Lib files for OpenSSL should already appeared under diectory out32dll.
+
+	(b) A link error which looks like "unresolved external symbol <SomeKindOfAPI>@0 referenced"
+		- This should not happen, the missing APIs that no longer supported in 
+		  Windows IoT Core are replaced in this version
+		- Re-check if the ntdll.mak was modified correctly.
+

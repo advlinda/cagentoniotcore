@@ -68,7 +68,7 @@
     <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>..\..\..\..\build\WinIoTCore\VC14\$(Configuration)\</OutDir>
+    <OutDir>$(MSBuildProjectDirectory)\..\..\..\..\build\WinIoTCore\VC14\$(ConfigurationReleaseMode)\</OutDir>
     <IntDir>$(OutDir)lib\</IntDir>
     <LinkIncremental Condition="'$(ConfigurationReleaseMode)'=='Release'">false</LinkIncremental>
     <LibraryPath>$(VCInstallDir)lib\onecore;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86)</LibraryPath>
@@ -79,8 +79,8 @@
       <Optimization Condition="'$(ConfigurationReleaseMode)'=='Release'">MaxSpeed</Optimization>
       <FunctionLevelLinking Condition="'$(ConfigurationReleaseMode)'=='Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(ConfigurationReleaseMode)'=='Release'">true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\curl-7.37.1\include;$(SolutionDir)Library3rdParty\curl-7.37.1\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\..\..\include;$(MSBuildProjectDirectory)\..\..\..\..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(MSBuildProjectDirectory)\..\..\..\..\..\openssl-1.0.1h.winiotcore\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STRICT;WIN32;BUILDING_LIBCURL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationOpenSSL)'!=''">USE_SSLEAY;USE_OPENSSL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -101,7 +101,7 @@
       <OptimizeReferences Condition="'$(ConfigurationReleaseMode)'=='Release'">true</OptimizeReferences>
       <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(ConfigurationOpenSSL)'!=''">libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(MSBuildProjectDirectory)\..\..\..\..\..\openssl-1.0.1h.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <OutputFile>$(OutDir)$(ProjectName).bsc</OutputFile>

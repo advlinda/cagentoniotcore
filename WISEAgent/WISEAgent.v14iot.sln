@@ -79,10 +79,10 @@ Global
 		{8E375E7A-9A5E-4FEA-971A-96ACA3257505}.Debug|x86.Build.0 = Debug|Win32
 		{8E375E7A-9A5E-4FEA-971A-96ACA3257505}.Release|x86.ActiveCfg = Release|Win32
 		{8E375E7A-9A5E-4FEA-971A-96ACA3257505}.Release|x86.Build.0 = Release|Win32
-		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Debug|x86.ActiveCfg = Debug|Win32
-		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Debug|x86.Build.0 = Debug|Win32
-		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Release|x86.ActiveCfg = Release|Win32
-		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Release|x86.Build.0 = Release|Win32
+		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Debug|x86.ActiveCfg = DLL Debug - DLL OpenSSL|Win32
+		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Debug|x86.Build.0 = DLL Debug - DLL OpenSSL|Win32
+		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Release|x86.ActiveCfg = DLL Release - DLL OpenSSL|Win32
+		{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}.Release|x86.Build.0 = DLL Release - DLL OpenSSL|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

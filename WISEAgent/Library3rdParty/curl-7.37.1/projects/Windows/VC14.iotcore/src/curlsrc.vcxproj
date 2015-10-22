@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+	<!--
+    <ProjectConfiguration Include="DLL Debug - DLL OpenSSL|Win32">
+      <Configuration>DLL Debug - DLL OpenSSL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL Debug - DLL OpenSSL|x64">
+      <Configuration>DLL Debug - DLL OpenSSL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL Debug|Win32">
+      <Configuration>DLL Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL Debug|x64">
+      <Configuration>DLL Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL Release - DLL OpenSSL|Win32">
+      <Configuration>DLL Release - DLL OpenSSL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL Release - DLL OpenSSL|x64">
+      <Configuration>DLL Release - DLL OpenSSL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL Release|Win32">
+      <Configuration>DLL Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL Release|x64">
+      <Configuration>DLL Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+	-->
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5228E9CE-A216-422F-A5E6-58E95E2DD71D}</ProjectGuid>
+    <RootNamespace>curlsrc</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup>
+    <!-- Debug == DLL Debug - DLL OpenSSL -->
+    <ConfigurationString Condition="'$(Configuration)'=='Debug'">DLL Debug - DLL OpenSSL</ConfigurationString>
+    <!-- Release == DLL Release - DLL OpenSSL -->
+    <ConfigurationString Condition="'$(Configuration)'=='Release'">DLL Release - DLL OpenSSL</ConfigurationString>
+    <ConfigurationString Condition="'$(Configuration)'!='Debug' and '$(Configuration)'!='Release'">$(Configuration)</ConfigurationString>
+    <ConfigurationReleaseMode Condition="$([System.String]::new('$(ConfigurationString)').Contains(' Debug'))">Debug</ConfigurationReleaseMode>
+    <ConfigurationReleaseMode Condition="$([System.String]::new('$(ConfigurationString)').Contains(' Release'))">Release</ConfigurationReleaseMode>
+	<ConfigurationPlatformBits>32</ConfigurationPlatformBits>
+    <ConfigurationPlatformBits Condition="$([System.String]::new('$(Platform)').Contains('64'))">64</ConfigurationPlatformBits>
+    <ConfigurationCurl Condition="$([System.String]::new('$(ConfigurationString)').StartsWith('DLL'))">DLL</ConfigurationCurl>
+    <ConfigurationCurl Condition="$([System.String]::new('$(ConfigurationString)').StartsWith('LIB'))">LIB</ConfigurationCurl>
+    <ConfigurationOpenSSL Condition="$([System.String]::new('$(ConfigurationString)').Contains('DLL OpenSSL'))">DLL</ConfigurationOpenSSL>
+    <ConfigurationOpenSSL Condition="$([System.String]::new('$(ConfigurationString)').Contains('LIB OpenSSL'))">LIB</ConfigurationOpenSSL>
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <UseDebugLibraries Condition="'$(ConfigurationReleaseMode)'=='Debug'">true</UseDebugLibraries>
+    <WholeProgramOptimization Condition="'$(ConfigurationReleaseMode)'=='Release'">true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup>
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <CurlDir>$(MSBuildProjectDirectory)\..\..\..\..\</CurlDir>
+    <Lib3rdPartyDir>$(MSBuildProjectDirectory)\..\..\..\..\..\</Lib3rdPartyDir>
+    <OutDir>$(CurlDir)build\WinIoTCore\VC14\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)src\</IntDir>
+    <LinkIncremental Condition="'$(ConfigurationReleaseMode)'=='Release'">false</LinkIncremental>
+    <LibraryPath Condition="'$(Platform)'=='Win32'">$(VCInstallDir)lib\onecore;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86)</LibraryPath>
+    <LibraryPath Condition="'$(Platform)'=='x64'">$(VCInstallDir)lib\onecore\amd64;$(WindowsSDK_LibraryPath_x64);$(UniversalCRT_LibraryPath_x64)</LibraryPath>
+    <LibraryPath Condition="'$(Platform)'=='ARM'">$(VCInstallDir)lib\onecore\arm;$(WindowsSDK_LibraryPath_arm);$(UniversalCRT_LibraryPath_arm)</LibraryPath>
+    <TargetName>curld</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization Condition="'$(ConfigurationReleaseMode)'=='Debug'">Disabled</Optimization>
+      <Optimization Condition="'$(ConfigurationReleaseMode)'=='Release'">MaxSpeed</Optimization>
+      <FunctionLevelLinking Condition="'$(ConfigurationReleaseMode)'=='Release'">true</FunctionLevelLinking>
+      <IntrinsicFunctions Condition="'$(ConfigurationReleaseMode)'=='Release'">true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(CurlDir)include;$(CurlDir)lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CONSOLE;STRICT;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationPlatformBits)'=='64'">WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary Condition="'$(ConfigurationReleaseMode)'=='Debug'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(ConfigurationReleaseMode)'=='Release'">MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <XMLDocumentationFileName>$(IntDir)</XMLDocumentationFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(CurlDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding Condition="'$(ConfigurationReleaseMode)'=='Release'">true</EnableCOMDATFolding>
+      <OptimizeReferences Condition="'$(ConfigurationReleaseMode)'=='Release'">true</OptimizeReferences>
+      <AdditionalDependencies>onecoreuap.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(ConfigurationOpenSSL)'!=''">libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(Lib3rdPartyDir)openssl-1.0.1h.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <Bscmake>
+      <OutputFile>$(TargetDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\lib\nonblock.c" />
+    <ClCompile Include="..\..\..\..\lib\rawstr.c" />
+    <ClCompile Include="..\..\..\..\lib\strdup.c" />
+    <ClCompile Include="..\..\..\..\lib\strtoofft.c" />
+    <ClCompile Include="..\..\..\..\lib\warnless.c" />
+    <ClCompile Include="..\..\..\..\src\tool_binmode.c" />
+    <ClCompile Include="..\..\..\..\src\tool_bname.c" />
+    <ClCompile Include="..\..\..\..\src\tool_cb_dbg.c" />
+    <ClCompile Include="..\..\..\..\src\tool_cb_hdr.c" />
+    <ClCompile Include="..\..\..\..\src\tool_cb_prg.c" />
+    <ClCompile Include="..\..\..\..\src\tool_cb_rea.c" />
+    <ClCompile Include="..\..\..\..\src\tool_cb_see.c" />
+    <ClCompile Include="..\..\..\..\src\tool_cb_wrt.c" />
+    <ClCompile Include="..\..\..\..\src\tool_cfgable.c" />
+    <ClCompile Include="..\..\..\..\src\tool_convert.c" />
+    <ClCompile Include="..\..\..\..\src\tool_dirhie.c" />
+    <ClCompile Include="..\..\..\..\src\tool_doswin.c" />
+    <ClCompile Include="..\..\..\..\src\tool_easysrc.c" />
+    <ClCompile Include="..\..\..\..\src\tool_formparse.c" />
+    <ClCompile Include="..\..\..\..\src\tool_getparam.c" />
+    <ClCompile Include="..\..\..\..\src\tool_getpass.c" />
+    <ClCompile Include="..\..\..\..\src\tool_help.c" />
+    <ClCompile Include="..\..\..\..\src\tool_helpers.c" />
+    <ClCompile Include="..\..\..\..\src\tool_homedir.c" />
+    <ClCompile Include="..\..\..\..\src\tool_hugehelp.c" />
+    <ClCompile Include="..\..\..\..\src\tool_libinfo.c" />
+    <ClCompile Include="..\..\..\..\src\tool_main.c" />
+    <ClCompile Include="..\..\..\..\src\tool_metalink.c" />
+    <ClCompile Include="..\..\..\..\src\tool_mfiles.c" />
+    <ClCompile Include="..\..\..\..\src\tool_msgs.c" />
+    <ClCompile Include="..\..\..\..\src\tool_operate.c" />
+    <ClCompile Include="..\..\..\..\src\tool_operhlp.c" />
+    <ClCompile Include="..\..\..\..\src\tool_panykey.c" />
+    <ClCompile Include="..\..\..\..\src\tool_paramhlp.c" />
+    <ClCompile Include="..\..\..\..\src\tool_parsecfg.c" />
+    <ClCompile Include="..\..\..\..\src\tool_setopt.c" />
+    <ClCompile Include="..\..\..\..\src\tool_sleep.c" />
+    <ClCompile Include="..\..\..\..\src\tool_urlglob.c" />
+    <ClCompile Include="..\..\..\..\src\tool_util.c" />
+    <ClCompile Include="..\..\..\..\src\tool_vms.c" />
+    <ClCompile Include="..\..\..\..\src\tool_writeenv.c" />
+    <ClCompile Include="..\..\..\..\src\tool_writeout.c" />
+    <ClCompile Include="..\..\..\..\src\tool_xattr.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\lib\config-win32.h" />
+    <ClInclude Include="..\..\..\..\lib\curl_setup.h" />
+    <ClInclude Include="..\..\..\..\lib\nonblock.h" />
+    <ClInclude Include="..\..\..\..\lib\rawstr.h" />
+    <ClInclude Include="..\..\..\..\lib\strdup.h" />
+    <ClInclude Include="..\..\..\..\lib\strtoofft.h" />
+    <ClInclude Include="..\..\..\..\lib\warnless.h" />
+    <ClInclude Include="..\..\..\..\src\tool_binmode.h" />
+    <ClInclude Include="..\..\..\..\src\tool_bname.h" />
+    <ClInclude Include="..\..\..\..\src\tool_cb_dbg.h" />
+    <ClInclude Include="..\..\..\..\src\tool_cb_hdr.h" />
+    <ClInclude Include="..\..\..\..\src\tool_cb_prg.h" />
+    <ClInclude Include="..\..\..\..\src\tool_cb_rea.h" />
+    <ClInclude Include="..\..\..\..\src\tool_cb_see.h" />
+    <ClInclude Include="..\..\..\..\src\tool_cb_wrt.h" />
+    <ClInclude Include="..\..\..\..\src\tool_cfgable.h" />
+    <ClInclude Include="..\..\..\..\src\tool_convert.h" />
+    <ClInclude Include="..\..\..\..\src\tool_dirhie.h" />
+    <ClInclude Include="..\..\..\..\src\tool_doswin.h" />
+    <ClInclude Include="..\..\..\..\src\tool_easysrc.h" />
+    <ClInclude Include="..\..\..\..\src\tool_formparse.h" />
+    <ClInclude Include="..\..\..\..\src\tool_getparam.h" />
+    <ClInclude Include="..\..\..\..\src\tool_getpass.h" />
+    <ClInclude Include="..\..\..\..\src\tool_helpers.h" />
+    <ClInclude Include="..\..\..\..\src\tool_help.h" />
+    <ClInclude Include="..\..\..\..\src\tool_homedir.h" />
+    <ClInclude Include="..\..\..\..\src\tool_hugehelp.h" />
+    <ClInclude Include="..\..\..\..\src\tool_libinfo.h" />
+    <ClInclude Include="..\..\..\..\src\tool_main.h" />
+    <ClInclude Include="..\..\..\..\src\tool_metalink.h" />
+    <ClInclude Include="..\..\..\..\src\tool_mfiles.h" />
+    <ClInclude Include="..\..\..\..\src\tool_msgs.h" />
+    <ClInclude Include="..\..\..\..\src\tool_operate.h" />
+    <ClInclude Include="..\..\..\..\src\tool_operhlp.h" />
+    <ClInclude Include="..\..\..\..\src\tool_panykey.h" />
+    <ClInclude Include="..\..\..\..\src\tool_paramhlp.h" />
+    <ClInclude Include="..\..\..\..\src\tool_parsecfg.h" />
+    <ClInclude Include="..\..\..\..\src\tool_sdecls.h" />
+    <ClInclude Include="..\..\..\..\src\tool_setopt.h" />
+    <ClInclude Include="..\..\..\..\src\tool_setup.h" />
+    <ClInclude Include="..\..\..\..\src\tool_sleep.h" />
+    <ClInclude Include="..\..\..\..\src\tool_urlglob.h" />
+    <ClInclude Include="..\..\..\..\src\tool_util.h" />
+    <ClInclude Include="..\..\..\..\src\tool_version.h" />
+    <ClInclude Include="..\..\..\..\src\tool_vms.h" />
+    <ClInclude Include="..\..\..\..\src\tool_writeenv.h" />
+    <ClInclude Include="..\..\..\..\src\tool_writeout.h" />
+    <ClInclude Include="..\..\..\..\src\tool_xattr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\src\curl.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

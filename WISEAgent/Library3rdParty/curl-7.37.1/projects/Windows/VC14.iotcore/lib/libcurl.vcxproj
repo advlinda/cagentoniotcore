@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+	<!--
     <ProjectConfiguration Include="DLL Debug|Win32">
       <Configuration>DLL Debug</Configuration>
       <Platform>Win32</Platform>
@@ -33,6 +42,7 @@
       <Configuration>DLL Release - DLL OpenSSL</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+	-->
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA6F56B4-06A4-441D-AD70-AC5A7D51FADB}</ProjectGuid>
@@ -41,11 +51,19 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup>
-    <ConfigurationReleaseMode Condition="$([System.String]::new('$(Configuration)').Contains(' Debug'))">Debug</ConfigurationReleaseMode>
-    <ConfigurationReleaseMode Condition="$([System.String]::new('$(Configuration)').Contains(' Release'))">Release</ConfigurationReleaseMode>
-    <ConfigurationTypeMode Condition="$([System.String]::new('$(Configuration)').StartsWith('DLL'))">DLL</ConfigurationTypeMode>
-    <ConfigurationTypeMode Condition="$([System.String]::new('$(Configuration)').StartsWith('LIB'))">LIB</ConfigurationTypeMode>
-    <ConfigurationOpenSSL Condition="$([System.String]::new('$(Configuration)').Contains('DLL OpenSSL'))">DLL</ConfigurationOpenSSL>
+    <!-- Debug == DLL Debug - DLL OpenSSL -->
+    <ConfigurationString Condition="'$(Configuration)'=='Debug'">DLL Debug - DLL OpenSSL</ConfigurationString>
+    <!-- Release == DLL Release - DLL OpenSSL -->
+    <ConfigurationString Condition="'$(Configuration)'=='Release'">DLL Release - DLL OpenSSL</ConfigurationString>
+    <ConfigurationString Condition="'$(Configuration)'!='Debug' and '$(Configuration)'!='Release'">$(Configuration)</ConfigurationString>
+    <ConfigurationReleaseMode Condition="$([System.String]::new('$(ConfigurationString)').Contains(' Debug'))">Debug</ConfigurationReleaseMode>
+    <ConfigurationReleaseMode Condition="$([System.String]::new('$(ConfigurationString)').Contains(' Release'))">Release</ConfigurationReleaseMode>
+	<ConfigurationPlatformBits>32</ConfigurationPlatformBits>
+    <ConfigurationPlatformBits Condition="$([System.String]::new('$(Platform)').Contains('64'))">64</ConfigurationPlatformBits>
+    <ConfigurationTypeMode Condition="$([System.String]::new('$(ConfigurationString)').StartsWith('DLL'))">DLL</ConfigurationTypeMode>
+    <ConfigurationTypeMode Condition="$([System.String]::new('$(ConfigurationString)').StartsWith('LIB'))">LIB</ConfigurationTypeMode>
+    <ConfigurationOpenSSL Condition="$([System.String]::new('$(ConfigurationString)').Contains('DLL OpenSSL'))">DLL</ConfigurationOpenSSL>
+    <ConfigurationOpenSSL Condition="$([System.String]::new('$(ConfigurationString)').Contains('LIB OpenSSL'))">LIB</ConfigurationOpenSSL>
     <ConfigurationType Condition="'$(ConfigurationTypeMode)'=='DLL'">DynamicLibrary</ConfigurationType>
     <ConfigurationType Condition="'$(ConfigurationTypeMode)'=='LIB'">StaticLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
@@ -54,7 +72,6 @@
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <UseDebugLibraries Condition="'$(ConfigurationReleaseMode)'=='Debug'">true</UseDebugLibraries>
-    <UseDebugLibraries Condition="'$(ConfigurationReleaseMode)'=='Release'">false</UseDebugLibraries>
     <WholeProgramOptimization Condition="'$(ConfigurationReleaseMode)'=='Release'">true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -68,10 +85,14 @@
     <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>$(MSBuildProjectDirectory)\..\..\..\..\build\WinIoTCore\VC14\$(ConfigurationReleaseMode)\</OutDir>
+    <CurlDir>$(MSBuildProjectDirectory)\..\..\..\..\</CurlDir>
+    <Lib3rdPartyDir>$(MSBuildProjectDirectory)\..\..\..\..\..\</Lib3rdPartyDir>
+    <OutDir>$(CurlDir)build\WinIoTCore\VC14\$(Configuration)\</OutDir>
     <IntDir>$(OutDir)lib\</IntDir>
     <LinkIncremental Condition="'$(ConfigurationReleaseMode)'=='Release'">false</LinkIncremental>
-    <LibraryPath>$(VCInstallDir)lib\onecore;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86)</LibraryPath>
+    <LibraryPath Condition="'$(Platform)'=='Win32'">$(VCInstallDir)lib\onecore;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86)</LibraryPath>
+    <LibraryPath Condition="'$(Platform)'=='x64'">$(VCInstallDir)lib\onecore\amd64;$(WindowsSDK_LibraryPath_x64);$(UniversalCRT_LibraryPath_x64)</LibraryPath>
+    <LibraryPath Condition="'$(Platform)'=='ARM'">$(VCInstallDir)lib\onecore\arm;$(WindowsSDK_LibraryPath_arm);$(UniversalCRT_LibraryPath_arm)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -79,9 +100,10 @@
       <Optimization Condition="'$(ConfigurationReleaseMode)'=='Release'">MaxSpeed</Optimization>
       <FunctionLevelLinking Condition="'$(ConfigurationReleaseMode)'=='Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(ConfigurationReleaseMode)'=='Release'">true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\..\..\include;$(MSBuildProjectDirectory)\..\..\..\..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(MSBuildProjectDirectory)\..\..\..\..\..\openssl-1.0.1h.winiotcore\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CurlDir)include;$(CurlDir)lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(Lib3rdPartyDir)openssl-1.0.1h.winiotcore\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STRICT;WIN32;BUILDING_LIBCURL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationPlatformBits)'=='64'">WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationOpenSSL)'!=''">USE_SSLEAY;USE_OPENSSL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -101,7 +123,7 @@
       <OptimizeReferences Condition="'$(ConfigurationReleaseMode)'=='Release'">true</OptimizeReferences>
       <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(ConfigurationOpenSSL)'!=''">libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(MSBuildProjectDirectory)\..\..\..\..\..\openssl-1.0.1h.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(Lib3rdPartyDir)openssl-1.0.1h.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <OutputFile>$(OutDir)$(ProjectName).bsc</OutputFile>

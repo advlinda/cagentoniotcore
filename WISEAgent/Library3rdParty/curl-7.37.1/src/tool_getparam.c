@@ -1811,7 +1811,7 @@ ParameterError parse_args(struct GlobalConfig *config, int argc,
 {
   int i;
   bool stillflags;
-  char *orig_opt;
+  char *orig_opt = NULL;
   ParameterError result = PARAM_OK;
   struct OperationConfig *operation = config->first;
 

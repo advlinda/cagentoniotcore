@@ -1,3 +1,0 @@
-set INCLUDE=%VCINSTALLDIR%include;%VCINSTALLDIR%atlmfc\include;%WindowsSdkDir%Include\10.0.10240.0\ucrt;%WindowsSdkDir%Include\10.0.10240.0\um;%WindowsSdkDir%Include\10.0.10240.0\shared;%WindowsSdkDir%Include\10.0.10240.0\winrt;%NETFXSDKDir%Include\um
-set LIB=%VCINSTALLDIR%lib\onecore;%WindowsSdkDir%lib\10.0.10240.0\um\x86;%NETFXSDKDir%lib\um\x86;%WindowsSdkDir%lib\10.0.10240.0\ucrt\x86
-set PATH=%LOCALAPPDATA%\nasm;C:\Perl\site\bin;C:\Perl\bin;C:\Perl64\site\bin;C:\Perl64\bin;%PATH%

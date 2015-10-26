@@ -42,7 +42,7 @@ handler_countdown_st * AddhHandlerCD(char const * name, int limit)
 	if (name == NULL)
 		return NULL;
 	
-	handler = (struct handler_countdown_st *)malloc(sizeof(handler_countdown_st));
+	handler = (handler_countdown_st *)malloc(sizeof(handler_countdown_st));
 
 	strncpy(handler->name, name, strlen(name)+1);
 	handler->count = 0;

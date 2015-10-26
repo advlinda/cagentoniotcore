@@ -35,6 +35,9 @@
     <ClCompile Include="..\impl\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\impl\Pipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\impl\ToolHelp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

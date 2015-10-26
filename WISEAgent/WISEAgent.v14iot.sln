@@ -24,6 +24,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MessageGenerator", "Library\MessageGenerator\MessageGenerator.vcxproj", "{EBC92C04-37FF-42FF-B535-E9862CBE9D07}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAManager", "Library\SAManager\SAManager.vcxproj", "{21A4C154-4826-4A16-ADEA-AA24C69EC53A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {243E8ED0-58CF-4322-BB7D-D52E70352608}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQFlashHelper", "Library\SQFlashHelper\SQFlashHelper.vcxproj", "{D3F647C2-0CB1-41D3-94E0-726BA5CC018A}"
 EndProject

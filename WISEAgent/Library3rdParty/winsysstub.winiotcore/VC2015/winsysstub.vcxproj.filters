@@ -15,24 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\detail\pch.h">
+    <ClInclude Include="..\detail\CpuArchitech.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\detail\CpuArchitech.h">
+    <ClInclude Include="..\detail\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\impl\pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\impl\EventLog.cpp">
+    <ClCompile Include="..\impl\Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\impl\DllEntry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\impl\Dialog.cpp">
+    <ClCompile Include="..\impl\EventLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\ToolHelp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

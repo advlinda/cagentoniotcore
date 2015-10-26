@@ -9,10 +9,12 @@
 #define pclose _pclose
 typedef int ssize_t;
 
-#ifdef _MSC_VER  
+#ifdef _MSC_VER
+#if _MSC_VER < 1800 // <stdbool.h> already in VC++ 2013
 #	define bool char
 #	define true 1
 #	define false 0
+#endif
 #else
 #	ifndef __cplusplus
 #		include <stdbool.h>

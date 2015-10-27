@@ -48,8 +48,7 @@ HANDLE
 WINAPI
 OpenEventLogA(
     _In_opt_ LPCSTR lpUNCServerName,
-    _In_     LPCSTR lpSourceName
-    )
+    _In_     LPCSTR lpSourceName)
 {
     return reinterpret_cast<HANDLE>(0x5100);
 }
@@ -58,8 +57,7 @@ extern __declspec(dllexport)
 BOOL
 WINAPI
 CloseEventLog(
-    _In_ HANDLE hEventLog
-    )
+    _In_ HANDLE hEventLog)
 {
     return TRUE;
 }
@@ -69,8 +67,7 @@ BOOL
 WINAPI
 GetNumberOfEventLogRecords(
     _In_  HANDLE hEventLog,
-    _Out_ PDWORD NumberOfRecords
-    )
+    _Out_ PDWORD NumberOfRecords)
 {
     if (NumberOfRecords) { *NumberOfRecords = 0; }
 
@@ -82,8 +79,7 @@ BOOL
 WINAPI
 GetOldestEventLogRecord(
     _In_  HANDLE hEventLog,
-    _Out_ PDWORD OldestRecord
-    )
+    _Out_ PDWORD OldestRecord)
 {
     if (OldestRecord) { *OldestRecord = 0; }
 
@@ -100,8 +96,7 @@ ReadEventLogA(
     _Out_writes_bytes_to_(nNumberOfBytesToRead, *pnBytesRead) LPVOID     lpBuffer,
     _In_  DWORD      nNumberOfBytesToRead,
     _Out_ DWORD      *pnBytesRead,
-    _Out_ DWORD      *pnMinNumberOfBytesNeeded
-    )
+    _Out_ DWORD      *pnMinNumberOfBytesNeeded)
 {
     if (pnBytesRead) { *pnBytesRead = 0; }
     if (pnMinNumberOfBytesNeeded) { *pnMinNumberOfBytesNeeded= 0; }

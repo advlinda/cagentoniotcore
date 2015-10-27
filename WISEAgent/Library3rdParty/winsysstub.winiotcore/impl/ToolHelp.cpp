@@ -13,8 +13,7 @@ HANDLE
 WINAPI
 CreateToolhelp32Snapshot(
     DWORD dwFlags,
-    DWORD th32ProcessID
-    )
+    DWORD th32ProcessID)
 {
     return reinterpret_cast<HANDLE>(0x5000);
 }
@@ -24,8 +23,7 @@ BOOL
 WINAPI
 Process32First(
     HANDLE hSnapshot,
-    LPVOID lppe
-    )
+    LPVOID lppe)
 {
     ::SetLastError(ERROR_NO_MORE_FILES);
 
@@ -37,8 +35,7 @@ BOOL
 WINAPI
 Process32Next(
     HANDLE hSnapshot,
-    LPVOID lppe
-    )
+    LPVOID lppe)
 {
     ::SetLastError(ERROR_NO_MORE_FILES);
 

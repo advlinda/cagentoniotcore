@@ -5,16 +5,8 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|Win32">
-      <Configuration>MinSizeRel</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|Win32">
-      <Configuration>RelWithDebInfo</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -22,241 +14,97 @@
     <ProjectGuid>{C5D3DF4D-7FFD-4AB7-95D8-8BF4AC50F915}</ProjectGuid>
     <RootNamespace>libmosquitto</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+    <LibraryPath>$(VCInstallDir)lib\onecore;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>mosquitto</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
-    <LinkIncremental>true</LinkIncremental>
+    <TargetName>mosquitto</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Midl>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MkTypLibCompatible>false</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <DllDataFileName />
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\include;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;CMAKE_INTDIR="Debug";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ExceptionHandling />
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\include;$(SolutionDir)Library3rdParty\pthreads.winiotcore\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;_WINDOWS;_DEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;CMAKE_INTDIR="Debug";libmosquitto_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AssemblerListingLocation />
-      <ObjectFileName>$(IntDir)</ObjectFileName>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;WITH_SRV;CMAKE_INTDIR="Debug";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\include;$(SolutionDir)Library3rdParty\pthreads.winiotcore\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
       <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;ssleay32.lib;libeay32.lib;pthreadVC2.lib;ws2_32.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap.lib;ssleay32.lib;libeay32.lib;pthreadVC2.lib;winsysstub.lib;winstaticstub.lib;</AdditionalDependencies>
       <OutputFile>$(OutDir)mosquitto.dll</OutputFile>
       <Version>1.3</Version>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib\$(OutDir);$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\lib;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib\$(OutDir);$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\lib;$(SolutionDir)Library3rdParty\pthreads.winiotcore\lib\x86;$(SolutionDir)Library3rdParty\winsysstub.winiotcore\VC2015\bin;$(SolutionDir)Library3rdParty\winstaticstub.winiotcore\VC2015\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(TargetDir)mosquitto.pdb</ProgramDatabaseFile>
       <ImportLibrary>$(TargetDir)mosquitto.lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Midl>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MkTypLibCompatible>false</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <DllDataFileName />
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\include;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;CMAKE_INTDIR="Release";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ExceptionHandling />
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\include;$(SolutionDir)Library3rdParty\pthreads.winiotcore\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;CMAKE_INTDIR="Release";libmosquitto_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AssemblerListingLocation>Release/</AssemblerListingLocation>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
       <WarningLevel>Level3</WarningLevel>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;WITH_SRV;CMAKE_INTDIR="Release";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\include;$(SolutionDir)Library3rdParty\pthreads.winiotcore\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
       <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;ssleay32.lib;libeay32.lib;pthreadVC2.lib;ws2_32.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap.lib;ssleay32.lib;libeay32.lib;pthreadVC2.lib;winsysstub.lib;winstaticstub.lib;</AdditionalDependencies>
       <OutputFile>$(OutDir)mosquitto.dll</OutputFile>
       <Version>1.3</Version>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib\$(OutDir);$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\lib;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>$(TargetDir)mosquitto.pdb</ProgramDatabaseFile>
-      <ImportLibrary>$(TargetDir)mosquitto.lib</ImportLibrary>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
-    <Midl>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MkTypLibCompatible>false</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <DllDataFileName />
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <ClCompile>
-      <Optimization>MinSpace</Optimization>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\include;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;WITH_SRV;CMAKE_INTDIR="MinSizeRel";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ExceptionHandling />
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <WarningLevel>Level3</WarningLevel>
-      <CompileAs>CompileAsC</CompileAs>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;WITH_SRV;CMAKE_INTDIR="MinSizeRel";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
-    <Link>
-      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;ssleay32.lib;libeay32.lib;pthreadVC2.lib;ws2_32.lib;cares.lib</AdditionalDependencies>
-      <OutputFile>$(OutDir)mosquitto.dll</OutputFile>
-      <Version>1.3</Version>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib\$(OutDir);$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\lib;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>$(TargetDir)mosquitto.pdb</ProgramDatabaseFile>
-      <ImportLibrary>$(TargetDir)mosquitto.lib</ImportLibrary>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
-    <Midl>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MkTypLibCompatible>false</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <GenerateStublessProxies>true</GenerateStublessProxies>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <DllDataFileName />
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\include;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;WITH_SRV;CMAKE_INTDIR="RelWithDebInfo";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ExceptionHandling />
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CompileAs>CompileAsC</CompileAs>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";_CRT_SECURE_NO_WARNINGS;WITH_TLS;WITH_TLS_PSK;WITH_THREADING;WITH_SRV;CMAKE_INTDIR="RelWithDebInfo";libmosquitto_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\mosquitto-1.3.4\lib;D:\workspace\SA3\Agent\CAgentLinux\Library3rdParty\openssl-1.0.1h.win32\include;C:\pthreads\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
-    <Link>
-      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;ssleay32.lib;libeay32.lib;pthreadVC2.lib;ws2_32.lib;cares.lib</AdditionalDependencies>
-      <OutputFile>$(OutDir)mosquitto.dll</OutputFile>
-      <Version>1.3</Version>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib\$(OutDir);$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\lib;$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(TargetDir)mosquitto.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib\$(OutDir);$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\lib;$(SolutionDir)Library3rdParty\pthreads.winiotcore\lib\x86;$(SolutionDir)Library3rdParty\winsysstub.winiotcore\VC2015\bin;$(SolutionDir)Library3rdParty\winstaticstub.winiotcore\VC2015\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>$(TargetDir)mosquitto.lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>

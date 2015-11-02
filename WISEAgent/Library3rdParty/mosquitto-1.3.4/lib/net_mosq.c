@@ -242,7 +242,7 @@ int _mosquitto_try_connect(const char *host, uint16_t port, int *sock, const cha
 {
 	struct addrinfo hints;
 	struct addrinfo *ainfo, *rp;
-	struct addrinfo *ainfo_bind, *rp_bind;
+	struct addrinfo *ainfo_bind = NULL, *rp_bind;
 	int s;
 	int rc;
 #ifdef WIN32

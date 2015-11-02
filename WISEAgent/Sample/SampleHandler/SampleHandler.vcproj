@@ -88,7 +88,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="XCOPY /Y $(InputDir)module_config.xml $(OutDir)\module\"
+				CommandLine="XCOPY /Y &quot;$(InputDir)module_config.xml&quot; &quot;$(OutDir)\module\&quot;"
 			/>
 		</Configuration>
 		<Configuration

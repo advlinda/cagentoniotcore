@@ -67,8 +67,8 @@
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libxml2.lib;onecoreuap.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\libxml2-2.7.8.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libxml2.lib;onecoreuap.lib;winsysstub.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\libxml2-2.7.8.winiotcore\lib;$(SolutionDir)Library3rdParty\winsysstub.winiotcore\VC2015\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -88,8 +88,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libxml2.lib;onecoreuap.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\libxml2-2.7.8.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libxml2.lib;onecoreuap.lib;winsysstub.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\libxml2-2.7.8.winiotcore\lib;$(SolutionDir)Library3rdParty\winsysstub.winiotcore\VC2015\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>

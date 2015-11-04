@@ -67,17 +67,16 @@
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mosquitto.lib;onecoreuap.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\win32\mosquitto;$(SolutionDir)Library\cJSON;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>onecoreuap.lib;winsysstub.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\winsysstub.winiotcore\VC2015\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\bin\*.dll" "$(TargetDir)"
-copy "$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\dll\x86\pthreadVC2.dll" "$(TargetDir)"
-</Command>
+      <Command>copy "$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\bin\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)Library3rdParty\pthreads.winiotcore\dll\x86\pthreadVC2.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,8 +93,8 @@ copy "$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\dll\x86\pthreadVC
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mosquitto.lib;onecoreuap.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4\win32\mosquitto;$(SolutionDir)Library\cJSON;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>onecoreuap.lib;winsysstub.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Library3rdParty\winsysstub.winiotcore\VC2015\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -104,9 +103,8 @@ copy "$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\dll\x86\pthreadVC
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Library3rdParty\openssl-1.0.1h.win32\bin\*.dll" "$(TargetDir)"
-copy "$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\dll\x86\pthreadVC2.dll" "$(TargetDir)"
-</Command>
+      <Command>copy "$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\bin\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)Library3rdParty\pthreads.winiotcore\dll\x86\pthreadVC2.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -115,10 +113,16 @@ copy "$(SolutionDir)Library3rdParty\pthreads.win32\Pre-built.2\dll\x86\pthreadVC
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Base64\Base64.vcxproj">
+      <Project>{489a403e-10e5-49b2-8a45-6db64866448b}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\cJSON\cJSON.vcxproj">
       <Project>{c15929aa-2406-4764-842f-839e6b3f17fc}</Project>
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\DES\DES.vcxproj">
+      <Project>{67656923-8cca-4b33-b645-13c0cda61d85}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Log\Log.vcxproj">
       <Project>{d807f1c9-38ad-44d1-8543-d2fb7808717e}</Project>

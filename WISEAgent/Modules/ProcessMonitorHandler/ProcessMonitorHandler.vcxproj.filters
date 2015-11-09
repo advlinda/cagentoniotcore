@@ -33,6 +33,12 @@
     <ClCompile Include="..\..\Platform\Windows\platform.c">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="process_config.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="process_threshold.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser.h">
@@ -52,6 +58,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Platform\Windows\platform.h">
       <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="process_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="process_threshold.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="process_common.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

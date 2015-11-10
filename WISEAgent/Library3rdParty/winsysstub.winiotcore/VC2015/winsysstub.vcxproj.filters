@@ -18,7 +18,25 @@
     <ClInclude Include="..\detail\CpuArchitech.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\detail\Handle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\detail\pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\detail\Processes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\detail\Scope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\detail\Token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\detail\ToolHelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\detail\UniqueResource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -36,6 +54,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\impl\Pipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\Processes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\Token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\impl\ToolHelp.cpp">

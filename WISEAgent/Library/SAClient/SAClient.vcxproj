@@ -58,12 +58,8 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)Platform\Windows;$(SolutionDir)Library\cJSON;$(SolutionDir)Library\Log;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\win32\mosquitto\include;$(SolutionDir)Include;$(SolutionDir)Library\Base64;$(SolutionDir)Library\DES;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;EXPORT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
@@ -72,7 +68,6 @@
       <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\bin\*.dll" "$(TargetDir)"
@@ -83,13 +78,11 @@ copy "$(SolutionDir)Library3rdParty\pthreads.winiotcore\dll\x86\pthreadVC2.dll" 
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Platform\Windows;$(SolutionDir)Library\cJSON;$(SolutionDir)Library\Log;$(SolutionDir)Library\Connection;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\win32\mosquitto\include;$(SolutionDir)Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Platform\Windows;$(SolutionDir)Library\cJSON;$(SolutionDir)Library\Log;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\win32\mosquitto\include;$(SolutionDir)Include;$(SolutionDir)Library\Base64;$(SolutionDir)Library\DES;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;EXPORT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
@@ -100,7 +93,6 @@ copy "$(SolutionDir)Library3rdParty\pthreads.winiotcore\dll\x86\pthreadVC2.dll" 
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\bin\*.dll" "$(TargetDir)"

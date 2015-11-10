@@ -119,7 +119,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN_IOT;WIN32;_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_IOT;WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>detail/pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..</AdditionalIncludeDirectories>
@@ -138,7 +138,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN_IOT;WIN32;_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_IOT;WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>detail/pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..</AdditionalIncludeDirectories>
@@ -154,7 +154,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN_IOT;WIN32;_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_IOT;WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>detail/pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..</AdditionalIncludeDirectories>
@@ -172,7 +172,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN_IOT;WIN32;_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_IOT;WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>detail/pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..</AdditionalIncludeDirectories>
@@ -195,7 +195,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN_IOT;WIN32;_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_IOT;WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>detail/pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..</AdditionalIncludeDirectories>
@@ -215,7 +215,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN_IOT;WIN32;_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_IOT;WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>detail/pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..</AdditionalIncludeDirectories>
@@ -230,7 +230,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\detail\CpuArchitech.h" />
+    <ClInclude Include="..\detail\Handle.h" />
     <ClInclude Include="..\detail\pch.h" />
+    <ClInclude Include="..\detail\Processes.h" />
+    <ClInclude Include="..\detail\Scope.h" />
+    <ClInclude Include="..\detail\Token.h" />
+    <ClInclude Include="..\detail\ToolHelp.h" />
+    <ClInclude Include="..\detail\UniqueResource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\impl\Dialog.cpp" />
@@ -240,6 +246,8 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\impl\Pipe.cpp" />
+    <ClCompile Include="..\impl\Processes.cpp" />
+    <ClCompile Include="..\impl\Token.cpp" />
     <ClCompile Include="..\impl\ToolHelp.cpp" />
     <ClCompile Include="..\impl\Window.cpp" />
   </ItemGroup>

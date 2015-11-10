@@ -672,7 +672,7 @@ int app_os_kill_process_name(char * processName)
 	pe.dwSize=sizeof(PROCESSENTRY32);
 	if(!Process32First(hSnapshot,&pe))
 	{
-		CloseHandle(hSnapshot);
+        app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
 		return iRet;
 	}
 	while(true)
@@ -706,8 +706,8 @@ int app_os_kill_process_name(char * processName)
 			break;
 		}
 	}
-	CloseHandle(hSnapshot);
-	return iRet;
+    app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+    return iRet;
 }
 
 int app_os_launch_process(char * appPath)
@@ -1088,8 +1088,8 @@ BOOL app_os_process_check(char * processName)
 	pe.dwSize=sizeof(PROCESSENTRY32);
 	if(!Process32First(hSnapshot,&pe))
 	{
-		CloseHandle(hSnapshot);
-		return bRet;
+        app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+        return bRet;
 	}
 	while(TRUE)
 	{
@@ -1103,8 +1103,8 @@ BOOL app_os_process_check(char * processName)
 			break;
 		}
 	}
-	CloseHandle(hSnapshot);
-	return bRet;
+	app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+    return bRet;
 }
 
 BOOL app_os_run_process_as_user(char * cmdLine)
@@ -1170,8 +1170,8 @@ BOOL app_os_run_process_as_user(char * cmdLine)
 				}
 			}
 		}
-		if(hSnapshot) CloseHandle(hSnapshot);
-	}
+        if(hSnapshot) app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+    }
 	return bRet;
 }
 
@@ -1910,8 +1910,8 @@ HANDLE app_os_GetProcessHandle(char * processName)
 			break;
 		}
 	}
-	if(hSnapshot) app_os_CloseHandle(hSnapshot);
-	return hPrc;
+	if(hSnapshot) app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+    return hPrc;
 }
 
 
@@ -2419,8 +2419,8 @@ BOOL app_os_ProcessCheck(char * processName)
 	pe.dwSize=sizeof(PROCESSENTRY32);
 	if(!Process32First(hSnapshot,&pe))
 	{
-		app_os_CloseHandle(hSnapshot);
-		return bRet;
+        app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+        return bRet;
 	}
 	while(TRUE)
 	{
@@ -2434,8 +2434,8 @@ BOOL app_os_ProcessCheck(char * processName)
 			break;
 		}
 	}
-	app_os_CloseHandle(hSnapshot);
-	return bRet;
+	app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+    return bRet;
 }
 
 
@@ -2607,9 +2607,17 @@ DWORD app_os_MprConfigGetFriendlyName(
 //	return GetAdaptersInfo(AdapterInfo,SizePointer);
 //}
 
+
 BOOL app_os_CloseSnapShot32Handle(HANDLE hSnapshot)
 {
+#if defined(WIN_IOT)
+    void WINAPI CloseToolhelp32Snapshot(HANDLE hSnapshot);
+
+    CloseToolhelp32Snapshot(hSnapshot);
+    return TRUE;
+#else
 	return CloseHandle(hSnapshot);
+#endif
 }
 
 char *app_os_itoa(int value, char *dest, int radix)
@@ -2675,8 +2683,8 @@ VOID app_os_GetProcessHandleList(HANDLE *eplHandleList, char *processName, int *
 			//break;
 		}
 	}
-	if(hSnapshot) app_os_CloseHandle(hSnapshot);
-	//return hPrc;
+	if(hSnapshot) app_os_CloseSnapShot32Handle(hSnapshot);// CloseHandle(hSnapshot);
+    //return hPrc;
 }
 
 VOID app_os_GetSysLogonUserList(char * logonUserList, int *logonUserCnt ,int maxLogonUserCnt,int maxLogonUserNameLen)

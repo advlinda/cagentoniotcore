@@ -60,10 +60,18 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winstaticstub", "Library3rdParty\winstaticstub.winiotcore\VC2015\winstaticstub.vcxproj", "{6712FEE6-2E19-49ED-9B88-9C3961F0B748}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAGeneralHandler", "Library\SAGeneralHandler\SAGeneralHandler.vcxproj", "{1E74C8D4-1F1C-4FDE-9DF5-206ED4049C5C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {243E8ED0-58CF-4322-BB7D-D52E70352608}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAClient", "Library\SAClient\SAClient.vcxproj", "{33738C18-71E6-44FF-A35E-B00BC49E8ACE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleClient", "Sample\SampleClient\SampleClient.vcxproj", "{745E0AE3-38F1-4274-A8C4-DAB9059D9F6D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProcessMonitorHandler", "Modules\ProcessMonitorHandler\ProcessMonitorHandler.vcxproj", "{EB109547-868F-41E8-B316-BF108B37CD49}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {243E8ED0-58CF-4322-BB7D-D52E70352608}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -148,6 +156,10 @@ Global
 		{745E0AE3-38F1-4274-A8C4-DAB9059D9F6D}.Debug|x86.Deploy.0 = Debug|Win32
 		{745E0AE3-38F1-4274-A8C4-DAB9059D9F6D}.Release|x86.ActiveCfg = Release|Win32
 		{745E0AE3-38F1-4274-A8C4-DAB9059D9F6D}.Release|x86.Build.0 = Release|Win32
+		{EB109547-868F-41E8-B316-BF108B37CD49}.Debug|x86.ActiveCfg = Debug|Win32
+		{EB109547-868F-41E8-B316-BF108B37CD49}.Debug|x86.Build.0 = Debug|Win32
+		{EB109547-868F-41E8-B316-BF108B37CD49}.Release|x86.ActiveCfg = Release|Win32
+		{EB109547-868F-41E8-B316-BF108B37CD49}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,5 +184,6 @@ Global
 		{1E74C8D4-1F1C-4FDE-9DF5-206ED4049C5C} = {7B695AB5-D38B-42A3-9D4B-3FB94B343AC7}
 		{33738C18-71E6-44FF-A35E-B00BC49E8ACE} = {7B695AB5-D38B-42A3-9D4B-3FB94B343AC7}
 		{745E0AE3-38F1-4274-A8C4-DAB9059D9F6D} = {2827767F-28A7-43BF-AF11-468020EB7802}
+		{EB109547-868F-41E8-B316-BF108B37CD49} = {0555ECAB-0D97-44BA-8A89-CE72C2EB2463}
 	EndGlobalSection
 EndGlobal

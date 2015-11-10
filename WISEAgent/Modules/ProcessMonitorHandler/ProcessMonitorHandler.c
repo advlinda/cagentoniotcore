@@ -346,6 +346,35 @@ static int GetProcessCPUUsageWithID(DWORD prcID, prc_cpu_usage_time_t * pPrcCpuU
 }
 
 #ifdef WIN32
+#if defined(WIN_IOT)
+BOOL AdjustPrivilege(HANDLE token, LPCTSTR privilege, BOOL enableNew, BOOL* pEnableOld)
+{
+	TOKEN_PRIVILEGES tp = { 1 };
+	
+	tp.PrivilegeCount           = 1;
+	tp.Privileges[0].Attributes = 0;
+	
+	if (!LookupPrivilegeValue(NULL, privilege, &tp.Privileges[0].Luid))
+	{
+		return FALSE;
+	}
+	
+	BOOL enableOld;
+	if (!pEnableOld) { pEnableOld = &enableOld; }
+	
+	if (enableNew) { tp.Privileges[0].Attributes |= SE_PRIVILEGE_ENABLED; }
+
+    TOKEN_PRIVILEGES tpOld = { 1 };
+    DWORD            cbOld = sizeof(tpOld);
+
+	BOOL bRet = AdjustTokenPrivileges(token, FALSE, &tp, sizeof(tp), &tpOld, &cbOld);
+    if (!bRet) { return bRet; }
+
+    *pEnableOld = (tpOld.Privileges[0].Attributes & SE_PRIVILEGE_ENABLED) ? TRUE : FALSE;
+
+    return bRet;
+}
+#else
 BOOL CALLBACK SAEnumProc(HWND hWnd,LPARAM lParam)
 {
 	DWORD dwProcessId;
@@ -365,7 +394,6 @@ BOOL CALLBACK SAEnumProc(HWND hWnd,LPARAM lParam)
 	return TRUE;
 }
 
-
 HWND GetProcessMainWnd(DWORD dwProcessId)
 {
 	WNDINFO wi;
@@ -374,11 +402,62 @@ HWND GetProcessMainWnd(DWORD dwProcessId)
 	EnumWindows(SAEnumProc,(LPARAM)&wi);
 	return wi.hWnd;
 }
+#endif
 
 BOOL IsProcessActiveWithIDEx(DWORD prcID)
 {
 	BOOL bRet = FALSE;
 
+#if defined(WIN_IOT)
+	HANDLE token = NULL;
+	
+	if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
+		&token))
+	{
+		goto exit;
+	}
+	
+	BOOL enableOld = TRUE;
+	if (!AdjustPrivilege(token, SE_DEBUG_NAME, TRUE, &enableOld))
+	{
+		goto closeToken;
+	}
+	
+	HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, prcID);
+	if (!hProc) { goto adjustBack; }
+	
+	DWORD exitCode = 0;
+	if (!GetExitCodeProcess(hProc, &exitCode)) { goto closeProcess; }
+	
+	if (exitCode == STILL_ACTIVE)
+	{
+		DWORD dwRet = WaitForSingleObject(hProc, 0);
+		if (dwRet == WAIT_OBJECT_0)
+		{			
+		}
+		else if (dwRet == WAIT_TIMEOUT)
+		{
+			bRet = TRUE;
+		}
+		else
+		{
+		}
+	}
+	
+closeProcess:	
+	CloseHandle(hProc);
+	
+adjustBack:
+	if (!enableOld)
+	{ // adjust back to original value
+		AdjustPrivilege(token, SE_DEBUG_NAME, FALSE, &enableOld);
+	}
+	
+closeToken:
+	CloseHandle(token);
+	
+exit:
+#else
 	if(prcID > 0)
 	{
 		HWND hWnd = NULL;
@@ -392,6 +471,7 @@ BOOL IsProcessActiveWithIDEx(DWORD prcID)
 			}
 		}
 	}
+#endif
 
 	return bRet;
 }
@@ -612,8 +692,8 @@ BOOL ProcessCheck(char * processName)
 	pe.dwSize=sizeof(PROCESSENTRY32);
 	if(!app_os_Process32First(hSnapshot,&pe))
 	{
-		app_os_CloseHandle(hSnapshot);
-		return bRet;
+        app_os_CloseSnapShot32Handle(hSnapshot);//app_os_CloseHandle(hSnapshot);
+        return bRet;
 	}
 	while(TRUE)
 	{
@@ -998,8 +1078,8 @@ BOOL GetTokenByName(HANDLE * hToken, char * prcName)
 			break;
 		}
 	}
-	if(hSnapshot) app_os_CloseHandle(hSnapshot);
-	return bRet;
+    if(hSnapshot) app_os_CloseSnapShot32Handle(hSnapshot);//app_os_CloseHandle(hSnapshot);
+    return bRet;
 }
 
 BOOL RunProcessAsUser(char * cmdLine, BOOL isAppNameRun, BOOL isShowWindow, DWORD * newPrcID)
@@ -1117,8 +1197,8 @@ DWORD RestartProcessWithID(DWORD prcID)
 	pe.dwSize=sizeof(PROCESSENTRY32);
 	if(!app_os_Process32First(hSnapshot,&pe))
 	{
-		app_os_CloseHandle(hSnapshot);
-		return dwPrcID;
+        app_os_CloseSnapShot32Handle(hSnapshot);//app_os_CloseHandle(hSnapshot);
+        return dwPrcID;
 	}
 	while(TRUE)
 	{
@@ -1168,8 +1248,8 @@ DWORD RestartProcessWithID(DWORD prcID)
 			break;
 		}
 	}
-	if(hSnapshot) app_os_CloseHandle(hSnapshot);
-	return dwPrcID;
+    if(hSnapshot) app_os_CloseSnapShot32Handle(hSnapshot);//app_os_CloseHandle(hSnapshot);
+    return dwPrcID;
 }
 
 
@@ -1182,8 +1262,8 @@ BOOL KillProcessWithID(DWORD prcID)
 	pe.dwSize=sizeof(PROCESSENTRY32);
 	if(!app_os_Process32First(hSnapshot,&pe))
 	{
-		app_os_CloseHandle(hSnapshot);
-		return bRet;
+        app_os_CloseSnapShot32Handle(hSnapshot);//app_os_CloseHandle(hSnapshot);
+        return bRet;
 	}
 	while(TRUE)
 	{
@@ -1215,8 +1295,8 @@ BOOL KillProcessWithID(DWORD prcID)
 			break;
 		}
 	}
-	app_os_CloseHandle(hSnapshot);
-	return bRet;
+    app_os_CloseSnapShot32Handle(hSnapshot);//app_os_CloseHandle(hSnapshot);
+    return bRet;
 }
 #else
 DWORD RestartProcessWithID(DWORD prcID)

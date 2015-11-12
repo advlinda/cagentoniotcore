@@ -2611,10 +2611,9 @@ DWORD app_os_MprConfigGetFriendlyName(
 BOOL app_os_CloseSnapShot32Handle(HANDLE hSnapshot)
 {
 #if defined(WIN_IOT)
-    void WINAPI CloseToolhelp32Snapshot(HANDLE hSnapshot);
+    BOOL WINAPI CloseToolhelp32Snapshot(HANDLE hSnapshot);
 
-    CloseToolhelp32Snapshot(hSnapshot);
-    return TRUE;
+    return CloseToolhelp32Snapshot(hSnapshot);
 #else
 	return CloseHandle(hSnapshot);
 #endif

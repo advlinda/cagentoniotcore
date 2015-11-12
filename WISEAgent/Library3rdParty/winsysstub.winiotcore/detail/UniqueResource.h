@@ -18,10 +18,10 @@ public:
     using exception_ptr = std::exception_ptr;
 
     UniqueResource(UniqueResource&& rhs) noexcept :
-    res_(rhs.detach()) {}
+    res_{ rhs.detach() } {}
 
     explicit UniqueResource(R&& res = T::invalid()) noexcept :
-        res_(std::move(res))
+        res_{ std::move(res) }
     {
         // res might (not) be clean up by above statement
         res = T::invalid(); // ensure to clean up
@@ -83,5 +83,5 @@ protected:
 
     R res_;
 }; // UniqueResource
-} // namespace base
-} // namespace mstc
+} // base
+} // mstc

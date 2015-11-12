@@ -23,7 +23,17 @@ Processes::id2Handle(
     auto adjustBack = mstc::base::scope([&enableOld, &token]()
     {
         if (enableOld) { return; }
-        token.adjustPrivilegeA("SeDebugPrivilege", false, enableOld);
+
+        try
+        {
+            token.adjustPrivilegeA("SeDebugPrivilege", false, enableOld);
+        }
+        catch (...)
+        {
+            // The token.adjustPrivilegeA might throw an exception.
+            // An exception from a destructor will cause termination.
+            // Here we try to prevent from termination.
+        }
     });
 
     for (auto& procId : procIds)

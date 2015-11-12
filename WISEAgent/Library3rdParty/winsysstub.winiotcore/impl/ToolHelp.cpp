@@ -3,6 +3,7 @@
 #include "detail/ToolHelp.h"
 #include <Psapi.h>
 #include <assert.h>
+#include <stack>
 #include "detail/Processes.h"
 
 #ifdef __cplusplus
@@ -18,20 +19,30 @@ CreateToolhelp32Snapshot(
 {
     if (dwFlags != TH32CS_SNAPPROCESS)
     {
-        assert(false);
+        //assert(false);
         return nullptr;
     }
 
-    return static_cast<HANDLE>(new SnapShot());
+    try
+    {
+        return static_cast<HANDLE>(new SnapShot());
+    }
+    catch (...)
+    {
+        return nullptr;
+    }
 }
 
 extern __declspec(dllexport)
-void
+BOOL
 WINAPI
 CloseToolhelp32Snapshot(
     HANDLE hSnapshot)
 {
+    if (!hSnapshot) { return FALSE; }
+
     delete static_cast<SnapShot*>(hSnapshot);
+    return TRUE;
 }
 
 extern __declspec(dllexport)
@@ -41,6 +52,8 @@ Process32First(
     HANDLE hSnapshot,
     LPVOID lppe)
 {
+    if (!hSnapshot) { return FALSE; }
+
     return static_cast<SnapShot*>(hSnapshot)->process32First(*static_cast<PROCESSENTRY32*>(lppe)) != false;
 }
 
@@ -51,6 +64,8 @@ Process32Next(
     HANDLE hSnapshot,
     LPVOID lppe)
 {
+    if (!hSnapshot) { return FALSE; }
+
     return static_cast<SnapShot*>(hSnapshot)->process32Next(*static_cast<PROCESSENTRY32*>(lppe)) != false;
 }
 
@@ -64,21 +79,51 @@ void SnapShot::snapProcess()
     procNext_ = 0;
     auto proc_id_size = sizeof(proc_id_vec::value_type);
 
-    for (; procIds_.size() < 65536;)
+    for (; procIds_.size() <= 4096;)
     {
         DWORD bytesReturn = 0;
         DWORD bytesInput = proc_id_size * procIds_.size();
         ::K32EnumProcesses(procIds_.data(), bytesInput, &bytesReturn);
         if (bytesReturn < bytesInput) {
             procIds_.resize(bytesReturn / proc_id_size);
-            Processes::id2Handle(procIds_, hProcs_);
+            convertIdsToHandles();
             return;
         }
 
         procIds_.resize(procIds_.size() * 2);
     }
 
-    assert(false);
+    //assert(false);
+}
+
+void SnapShot::convertIdsToHandles()
+{
+    try
+    {
+        Processes::id2Handle(procIds_, hProcs_);
+    }
+    catch (...)
+    {
+    }
+
+    auto size = hProcs_.size();
+    procIds_.resize(size);
+
+    // try to book all invalid hProc in reverse order!
+    std::stack<decltype(size)> invalidProcs;
+
+    for (decltype(size) i = 0; i < size; ++i)
+    {
+        if (hProcs_[i] == proc_handle::invalid()) { invalidProcs.push(i); }
+    }
+
+    // remove all invalid procId and hProc in reverse order!
+    for (; !invalidProcs.empty(); invalidProcs.pop())
+    {
+        auto i = invalidProcs.top();
+        procIds_.erase(procIds_.begin() + i);
+        hProcs_.erase(hProcs_.begin() + i);
+    }
 }
 
 bool SnapShot::process32First(PROCESSENTRY32& ppe)
@@ -89,6 +134,12 @@ bool SnapShot::process32First(PROCESSENTRY32& ppe)
 
 bool SnapShot::process32Next(PROCESSENTRY32& ppe)
 {
+    if (procNext_ >= procIds_.size())
+    {
+        ::SetLastError(ERROR_NO_MORE_FILES);
+        return false;
+    }
+
     ++procNext_;
     return process32(ppe);
 }
@@ -97,19 +148,13 @@ bool SnapShot::process32(PROCESSENTRY32& ppe)
 {
     if (ppe.dwSize < sizeof(ppe))
     {
-        assert(false);
+        //assert(false);
         return false;
     }
 
-    if (procNext_ == procIds_.size())
+    if (procNext_ >= procIds_.size())
     {
         ::SetLastError(ERROR_NO_MORE_FILES);
-        return false;
-    }
-
-    if (procNext_ > procIds_.size())
-    {
-        assert(false);
         return false;
     }
 

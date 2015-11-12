@@ -44,7 +44,7 @@ DWORD WINAPI K32GetModuleBaseNameA(HANDLE hProcess, HMODULE hModule, LPSTR lpBas
 class SnapShot
 {
 public:
-    explicit SnapShot() : procNext_{0}
+    explicit SnapShot()
     {
         snapProcess();
     }
@@ -61,9 +61,10 @@ private:
     using proc_handle     = mstc::tckernel::Handle;
     using proc_handle_vec = std::vector<proc_handle>;
 
+    void convertIdsToHandles();
     bool process32(PROCESSENTRY32&);
 
     proc_id_vec     procIds_;
     proc_handle_vec hProcs_;
-    size_t          procNext_;
+    size_t          procNext_ = 0;
 };

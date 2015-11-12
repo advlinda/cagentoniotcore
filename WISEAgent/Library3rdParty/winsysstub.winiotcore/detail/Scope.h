@@ -10,7 +10,7 @@ template <typename F>
 class ScopeF
 {
 public:
-    explicit ScopeF(F&& f) noexcept : f_(std::move(f)) {}
+    explicit ScopeF(F&& f) noexcept : f_{ std::move(f) } {}
 
     ~ScopeF()
     {

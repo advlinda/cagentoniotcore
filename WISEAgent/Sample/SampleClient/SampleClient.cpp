@@ -24,6 +24,18 @@ void on_msgrecv(char* topic, susiaccess_packet_body_t *pkt, void *pRev1, void* p
 	printf("Packet received, %s\r\n", pkt->content);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+// This is not a service.
+extern __declspec(dllexport)
+int _OPENSSL_isservice() { return 0; }
+
+#ifdef __cplusplus
+}
+#endif  /* __cplusplus */
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int iRet = 0;

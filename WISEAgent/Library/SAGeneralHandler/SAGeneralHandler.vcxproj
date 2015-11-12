@@ -93,6 +93,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Library3rdParty\curl-7.37.1\projects\Windows\VC14.iotcore\lib\libcurl.vcxproj">
+      <Project>{da6f56b4-06a4-441d-ad70-ac5a7d51fadb}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\cJSON\cJSON.vcxproj">
       <Project>{c15929aa-2406-4764-842f-839e6b3f17fc}</Project>
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>

@@ -58,6 +58,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)Platform\Windows;$(SolutionDir)Library3rdParty\libxml2-2.7.8.winiotcore\include;$(SolutionDir)Include;$(SolutionDir)Library\Log;$(SolutionDir)Library\cJSON;$(SolutionDir)Library\MD5;$(SolutionDir)Library\FtpHelper;$(SolutionDir)Library\SAConfig;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <CompileAs>CompileAsC</CompileAs>
@@ -76,6 +77,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(SolutionDir)Platform\Windows;$(SolutionDir)Library3rdParty\libxml2-2.7.8.winiotcore\include;$(SolutionDir)Include;$(SolutionDir)Library\Log;$(SolutionDir)Library\cJSON;$(SolutionDir)Library\MD5;$(SolutionDir)Library\FtpHelper;$(SolutionDir)Library\SAConfig;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>

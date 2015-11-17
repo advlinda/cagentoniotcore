@@ -8,7 +8,7 @@ namespace mstc
 namespace base
 {
 // T : resource traits require two functions
-//     static HLOCAL invalid()
+//     static R invalid()
 //     static void destroy()
 // R : resource type
 template <typename T, typename R>
@@ -18,7 +18,7 @@ public:
     using exception_ptr = std::exception_ptr;
 
     UniqueResource(UniqueResource&& rhs) noexcept :
-    res_{ rhs.detach() } {}
+        res_{ rhs.detach() } {}
 
     explicit UniqueResource(R&& res = T::invalid()) noexcept :
         res_{ std::move(res) }
@@ -35,7 +35,7 @@ public:
     UniqueResource& operator =(R&& res) noexcept
     {
         destroy();
-        res_ = res;
+        res_ = std::move(res);
         // res might (not) be clean up by above statement
         res = T::invalid(); // ensure to clean up
         return *this;

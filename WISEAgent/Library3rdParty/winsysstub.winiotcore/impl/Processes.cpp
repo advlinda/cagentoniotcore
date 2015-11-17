@@ -41,20 +41,26 @@ Processes::id2Handle(
     for (auto& procId : procIds)
     {
         auto hProc = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, procId);
-        char szExeFile[MAX_PATH];
-        szExeFile[0] = '\0';
-        DWORD cb = _countof(szExeFile);
-        auto ret = ::K32GetModuleBaseNameA(hProc, nullptr, szExeFile, cb);
-        if (szExeFile[0] == '\0')
-        { // skip non privilege processes
-            hProc = NULL;
-        }
-        else if (!ret)
-        { // skip non privilege processes
-            hProc = NULL;
-        }
-        else
+        if (hProc)
         {
+
+            char szExeFile[MAX_PATH];
+            szExeFile[0] = '\0';
+            DWORD cb = _countof(szExeFile);
+            auto ret = ::K32GetModuleBaseNameA(hProc, nullptr, szExeFile, cb);
+            if (szExeFile[0] == '\0')
+            { // skip non privilege processes
+                ::CloseHandle(hProc);
+                hProc = NULL;
+            }
+            else if (!ret)
+            { // skip non privilege processes
+                ::CloseHandle(hProc);
+                hProc = NULL;
+            }
+            else
+            {
+            }
         }
         hProcs.push_back(mstc::tckernel::Handle(std::move(hProc)));
     }

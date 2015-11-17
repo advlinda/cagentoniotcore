@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <DebuggerFlavor>WindowsRemoteDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>-h</LocalDebuggerCommandArguments>
+    <RemoteDebuggerWorkingDirectory>C:\Deploy</RemoteDebuggerWorkingDirectory>
+    <RemoteDebuggerServerName>adv-iot</RemoteDebuggerServerName>
+    <DeploymentDirectory>C:\Deploy</DeploymentDirectory>
+    <RemoteDebuggerCommand>C:\Deploy\SampleService.exe</RemoteDebuggerCommand>
+    <RemoteDebuggerDeployDebugCppRuntime>false</RemoteDebuggerDeployDebugCppRuntime>
+    <RemoteDebuggerConnection>RemoteWithoutAuthentication</RemoteDebuggerConnection>
+    <RemoteDebuggerDebuggerType>NativeOnly</RemoteDebuggerDebuggerType>
+    <RemoteDebuggerCommandArguments>-i</RemoteDebuggerCommandArguments>
+  </PropertyGroup>
+</Project>

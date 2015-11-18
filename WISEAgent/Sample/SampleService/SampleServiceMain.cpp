@@ -1,6 +1,10 @@
 // SampleServiceMain.cpp : Defines the entry point for the console application.
 //
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 #include "platform.h"
 #include "common.h"
 #include "service.h"
@@ -21,17 +25,9 @@ void on_connect_cb();
 void on_lost_connect_cb();
 void on_disconnect_cb();
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-	// This is a service.
-	extern __declspec(dllexport)
-		int _OPENSSL_isservice() { return 1; }
-
-#ifdef __cplusplus
-}
-#endif  /* __cplusplus */
+// This is a service.
+extern __declspec(dllexport)
+	int _OPENSSL_isservice() { return 1; }
 
 static CAGENT_PTHREAD_ENTRY(ConnectThreadStart, args)
 {
@@ -180,6 +176,10 @@ int CAgentStop()
 
 	return iRet;
 }
+
+#ifdef __cplusplus
+}
+#endif  /* __cplusplus */
 
 int main(int argc, char *argv[])
 {

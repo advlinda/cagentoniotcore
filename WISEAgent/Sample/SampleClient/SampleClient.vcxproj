@@ -171,7 +171,7 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /Y "$(InputDir)agent_config.xml" "$(OutDir)\module\"</Command>
+      <Command>XCOPY /Y "$(InputDir)agent_config.xml" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -231,7 +231,7 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /Y "$(InputDir)agent_config.xml" "$(OutDir)\module\"</Command>
+      <Command>XCOPY /Y "$(InputDir)agent_config.xml" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

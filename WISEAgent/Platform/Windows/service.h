@@ -23,9 +23,17 @@
 typedef int (*APP_START_CB) ();
 typedef int (*APP_STOP_CB) ();
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 int ServiceInit(char * pSrvcName, char * pVersion, APP_START_CB pStart, APP_STOP_CB pStop, void * logHandle);
 int ServiceUninit();
 int LaunchService();
 int ExecuteCmd(char* cmd);
+
+#ifdef __cplusplus
+}
+#endif  /* __cplusplus */
 
 #endif

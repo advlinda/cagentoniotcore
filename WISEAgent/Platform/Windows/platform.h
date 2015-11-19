@@ -57,6 +57,10 @@ int GetCurrentUTCISODate(char* datetime);
 
 #define strncasecmp  strnicmp 
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void TrimStr(char * str);
 
 wchar_t * ANSIToUnicode(const char * str);
@@ -70,5 +74,9 @@ char * UnicodeToUTF8(const wchar_t * str);
 char * ANSIToUTF8(const char * str);
 
 char * UTF8ToANSI(const char * str);
+
+#ifdef __cplusplus
+}
+#endif  /* __cplusplus */
 
 #endif

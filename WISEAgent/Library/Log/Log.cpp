@@ -113,6 +113,11 @@ static void WriteLogFile(LOGHANDLE logHandle, int id, LOGMODE logMode, LogLevel 
 #endif
 }
 
+// define C functions in a .cpp file
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 LOGHANDLE InitLog(char * logFileName)
 {
 	LOGHANDLE logHandle = NULL;
@@ -190,3 +195,7 @@ void WriteIndividualLog(LOGHANDLE logHandle, char* group, LOGMODE logMode, LogLe
     WriteLogFile(logHandle, id, logMode, level, format, ap);
     va_end(ap);
 }
+
+#ifdef __cplusplus
+}
+#endif

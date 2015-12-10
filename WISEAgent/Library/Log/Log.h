@@ -30,8 +30,9 @@ void WriteLog(LOGHANDLE logHandle, LOGMODE logMode, LogLevel level, const char *
 
 #ifdef LOG4Z
 int GetLogID(LOGHANDLE logHandle, char * logname);
-void WriteIndividualLog(LOGHANDLE logHandle, char* group, LOGMODE logMode, LogLevel level, const char * format, ...);
 #endif
+
+void WriteIndividualLog(LOGHANDLE logHandle, char* group, LOGMODE logMode, LogLevel level, const char * format, ...);
 
 #ifdef __cplusplus
 }

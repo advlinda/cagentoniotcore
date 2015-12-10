@@ -64,14 +64,15 @@
     <ConfigurationCurl Condition="$([System.String]::new('$(ConfigurationString)').StartsWith('LIB'))">LIB</ConfigurationCurl>
     <ConfigurationOpenSSL Condition="$([System.String]::new('$(ConfigurationString)').Contains('DLL OpenSSL'))">DLL</ConfigurationOpenSSL>
     <ConfigurationOpenSSL Condition="$([System.String]::new('$(ConfigurationString)').Contains('LIB OpenSSL'))">LIB</ConfigurationOpenSSL>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries Condition="'$(ConfigurationReleaseMode)'=='Debug'">true</UseDebugLibraries>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration">
-    <UseDebugLibraries Condition="'$(ConfigurationReleaseMode)'=='Debug'">true</UseDebugLibraries>
     <WholeProgramOptimization Condition="'$(ConfigurationReleaseMode)'=='Release'">true</WholeProgramOptimization>
+    <WindowsSDKDesktopARMSupport Condition="'$(Platform)'=='ARM'">true</WindowsSDKDesktopARMSupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,13 +85,12 @@
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <CurlDir>$(MSBuildProjectDirectory)\..\..\..\..\</CurlDir>
     <Lib3rdPartyDir>$(MSBuildProjectDirectory)\..\..\..\..\..\</Lib3rdPartyDir>
-    <OutDir>$(CurlDir)build\WinIoTCore\VC14\$(Configuration)\</OutDir>
-    <IntDir>$(OutDir)src\</IntDir>
-    <LinkIncremental Condition="'$(ConfigurationReleaseMode)'=='Release'">false</LinkIncremental>
     <LibraryPath Condition="'$(Platform)'=='Win32'">$(VCInstallDir)lib\onecore;$(WindowsSDK_LibraryPath_x86);$(UniversalCRT_LibraryPath_x86)</LibraryPath>
     <LibraryPath Condition="'$(Platform)'=='x64'">$(VCInstallDir)lib\onecore\amd64;$(WindowsSDK_LibraryPath_x64);$(UniversalCRT_LibraryPath_x64)</LibraryPath>
     <LibraryPath Condition="'$(Platform)'=='ARM'">$(VCInstallDir)lib\onecore\arm;$(WindowsSDK_LibraryPath_arm);$(UniversalCRT_LibraryPath_arm)</LibraryPath>
     <TargetName>curld</TargetName>
+    <OutDir>$(CurlDir)build\WinIoTCore\VC14\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)src\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -99,13 +99,10 @@
       <FunctionLevelLinking Condition="'$(ConfigurationReleaseMode)'=='Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(ConfigurationReleaseMode)'=='Release'">true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(CurlDir)include;$(CurlDir)lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CONSOLE;STRICT;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(ConfigurationPlatformBits)'=='64'">WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationReleaseMode)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <RuntimeLibrary Condition="'$(ConfigurationReleaseMode)'=='Debug'">MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(ConfigurationReleaseMode)'=='Release'">MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions Condition="'$(ConfigurationPlatformBits)'=='64'">WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_IOT;_CONSOLE;STRICT;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -119,10 +116,9 @@
       <AdditionalIncludeDirectories>$(CurlDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding Condition="'$(ConfigurationReleaseMode)'=='Release'">true</EnableCOMDATFolding>
       <OptimizeReferences Condition="'$(ConfigurationReleaseMode)'=='Release'">true</OptimizeReferences>
-      <AdditionalDependencies>onecoreuap.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap.lib;libcurl.lib;</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(ConfigurationOpenSSL)'!=''">libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(ConfigurationOpenSSL)'!=''">$(Lib3rdPartyDir)openssl-1.0.1h.winiotcore\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

@@ -929,7 +929,7 @@ void Curl_sndbufset(curl_socket_t sockfd)
 
   if(detectOsState == DETECT_OS_NONE) {
 #if !defined(_WIN32_WINNT) || !defined(_WIN32_WINNT_WIN2K) || \
-    (_WIN32_WINNT < _WIN32_WINNT_WIN2K)
+    (_WIN32_WINNT < _WIN32_WINNT_WIN2K) || defined(WIN_IOT)
     OSVERSIONINFO osver;
 
     memset(&osver, 0, sizeof(osver));

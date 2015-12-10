@@ -166,7 +166,6 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)Library\MessageGenerator;$(SolutionDir)Platform\Windows</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>onecoreuap.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -183,7 +182,6 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)Library\MessageGenerator;$(SolutionDir)Platform\Windows</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>onecoreuap.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -200,7 +198,6 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)Library\MessageGenerator;$(SolutionDir)Platform\Windows</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>onecoreuap.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -219,7 +216,6 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)Library\MessageGenerator;$(SolutionDir)Platform\Windows</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>onecoreuap.lib</AdditionalDependencies>
@@ -240,7 +236,6 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)Library\MessageGenerator;$(SolutionDir)Platform\Windows</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>onecoreuap.lib</AdditionalDependencies>
@@ -262,7 +257,6 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>onecoreuap.lib</AdditionalDependencies>

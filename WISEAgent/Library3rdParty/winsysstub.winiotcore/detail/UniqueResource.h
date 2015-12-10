@@ -7,24 +7,44 @@ namespace mstc
 {
 namespace base
 {
+template <typename T>
+struct ResourceTraits
+{
+    using R = T;
+    using exception_ptr = std::exception_ptr;
+
+    constexpr static R invalid() noexcept
+    {
+        return nullptr;
+    }
+
+    // Traits should provide its own destroy
+    //  static exception_ptr destroy(R r) noexcept
+    //  {
+    //      return nullptr;
+    //  }
+};
+
 // Traits : resource traits require two functions
+//          R is resource type
 //          static R invalid()
-//          static void destroy()
-// R : resource type
-template <typename Traits, typename R>
+//          static exception_ptr destroy()
+template <typename Traits>
 class UniqueResource
 {
 public:
+    using traits_type = Traits;
+    using R = typename traits_type::R;
     using exception_ptr = std::exception_ptr;
 
     UniqueResource(UniqueResource&& rhs) noexcept :
-        res_{ rhs.detach() } {}
+    res_{ rhs.detach() } {}
 
-    explicit UniqueResource(R&& res = invalid()) noexcept :
+    explicit UniqueResource(R&& res = traits_type::invalid()) noexcept :
         res_{ std::move(res) }
     {
         // res might (not) be clean up by above statement
-        res = invalid(); // ensure to clean up
+        res = traits_type::invalid(); // ensure to clean up
     }
 
     ~UniqueResource()
@@ -37,7 +57,7 @@ public:
         destroy();
         res_ = std::move(res);
         // res might (not) be clean up by above statement
-        res = invalid(); // ensure to clean up
+        res = traits_type::invalid(); // ensure to clean up
         return *this;
     }
 
@@ -59,35 +79,36 @@ public:
         auto ret = destroy();
         res_ = std::move(res);
         // res might (not) be clean up by above statement
-        res = invalid();
+        res = traits_type::invalid();
         return ret;
     }
 
     R detach() noexcept
     {
         auto res = res_;
-        res_ = invalid();
+        res_ = traits_type::invalid();
         return res;
     }
 
     exception_ptr destroy() noexcept
     {
-        if (res_ == invalid()) { return nullptr; }
+        if (res_ == traits_type::invalid()) { return nullptr; }
 
-        auto ret = Traits::destroy(res_);
-        res_ = invalid();
+        auto ret = traits_type::destroy(res_);
+        res_ = traits_type::invalid();
         return ret;
     }
-	
-    static const R invalid() noexcept
+
+    void swap(UniqueResource& rhs) noexcept
     {
-        return Traits::invalid();
+        using std;
+        swap(res_, rhs.res_);
     }
 
-	friend void swap(UniqueResource& lhs, UniqueResource& rhs) noexcept
-	{
-		std::swap(lhs, rhs);
-	}
+    friend void swap(UniqueResource& lhs, UniqueResource& rhs) noexcept
+    {
+        lhs.swap(rhs);
+    }
 
 protected:
     UniqueResource(const UniqueResource&) = delete;

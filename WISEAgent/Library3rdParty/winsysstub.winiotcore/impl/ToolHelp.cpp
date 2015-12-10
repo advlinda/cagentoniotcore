@@ -114,7 +114,10 @@ void SnapShot::convertIdsToHandles()
 
     for (decltype(size) i = 0; i < size; ++i)
     {
-        if (hProcs_[i] == proc_handle::invalid()) { invalidProcs.push(i); }
+        if (hProcs_[i] == proc_handle::traits_type::invalid())
+        {
+            invalidProcs.push(i);
+        }
     }
 
     // remove all invalid procId and hProc in reverse order!

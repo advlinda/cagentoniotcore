@@ -12,11 +12,9 @@ namespace mstc
 {
 namespace tckernel
 {
-class HandleTraits
+class HandleTraits : public mstc::base::ResourceTraits<HANDLE>
 {
 public:
-    using exception_ptr = std::exception_ptr;
-
     // compile error - C3249 : illegal statement or sub-expression for 'constexpr'
     //  static constexpr HANDLE invalid() noexcept
     static const HANDLE invalid() noexcept
@@ -39,10 +37,10 @@ public:
     }
 }; // HandleTraits
 
-class Handle : public mstc::base::UniqueResource<HandleTraits, HANDLE>
+class Handle : public mstc::base::UniqueResource<HandleTraits>
 {
 public:
-    using base_type = mstc::base::UniqueResource<HandleTraits, HANDLE>;
+    using base_type = mstc::base::UniqueResource<HandleTraits>;
     using base_type::base_type;
     using base_type::operator =;
 }; // Handle

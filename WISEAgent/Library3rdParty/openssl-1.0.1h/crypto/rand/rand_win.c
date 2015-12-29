@@ -625,12 +625,19 @@ int RAND_poll(void)
 	/* memory usage statistics */
 #if defined(WIN_IOT)
   {
-    unsigned char* seed = (unsigned char*)&m;
-    for (int i = 0; i < sizeof(m); i += sizeof(unsigned int)) {
-      unsigned int number;
-      rand_s(&number);
-      *((unsigned int*)(&seed[i])) = number;    
-    }
+	MEMORYSTATUSEX mex;
+
+	mex.dwLength = sizeof(mex);
+	GlobalMemoryStatusEx(&mex);
+
+	m.dwLength = sizeof(m);
+	m.dwMemoryLoad = mex.dwMemoryLoad;
+	m.dwTotalPhys = (DWORD)mex.ullTotalPhys;
+	m.dwAvailPhys = (DWORD)mex.ullAvailPhys;
+	m.dwTotalPageFile = (DWORD)mex.ullTotalPageFile;
+	m.dwAvailPageFile = (DWORD)mex.ullAvailPageFile;
+	m.dwTotalVirtual = (DWORD)mex.ullTotalVirtual;
+	m.dwAvailVirtual = (DWORD)mex.ullAvailVirtual;
   }
 #else
 	GlobalMemoryStatus(&m);

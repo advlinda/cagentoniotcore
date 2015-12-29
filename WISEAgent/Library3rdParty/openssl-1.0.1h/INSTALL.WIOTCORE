@@ -18,7 +18,7 @@
  
  1. Run a VS2015 x86 Native Tools Command Prompt
 
- 2. Set environment variables
+ 2. Setup environment variables
 	
    * You can also execute the environment setting file, IoT-Vars.cmd,
      under the diectory of openssl-1.0.1h.winiotcore, instead doing a, b, and c step.
@@ -79,7 +79,7 @@
   - Link the library onecoreuap.lib winsysstub.lib 
    (Remove ws2_32.lib gdi32.lib advapi32.lib crypt32.lib user32.lib etc.)
   - Add -DWIN_IOT into CFLAG
-  - Add libpath:/libpath:"../winsysstub.winiotcore/VC2015/bin/"
+  - Add libpath:/libpath:"../winsysstub.winiotcore/VC2015/bin/" into MLFLAGS
  
   For example:
 		CFLAG= /MD /Ox /O2 /Ob2 -DWIN_IOT ...
@@ -88,6 +88,7 @@
 
  7. Build the whole project
 
+     > nmake -f ms\ntdll.mak vclean (if you need to clean the build first)
      > nmake -f ms\ntdll.mak
   
  8. There might be link errors in the building result

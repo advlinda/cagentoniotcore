@@ -55,7 +55,6 @@
       <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_WINDOWS;STRICT;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>CMAKE;VERSION="1.3.4";TIMESTAMP="2014/09/30 ¶g¤G  9:05:59.82";WITH_TLS;WITH_TLS_PSK;WITH_THREADING;libmosquitto_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>$(SolutionDir)Library3rdParty\mosquitto-1.3.4;$(SolutionDir)Library3rdParty\mosquitto-1.3.4\lib;$(SolutionDir)Library3rdParty\openssl-1.0.1h.winiotcore\include;$(SolutionDir)Library3rdParty\pthreads.winiotcore\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>

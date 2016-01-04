@@ -51,7 +51,6 @@
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_LIB;STRICT;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)Platform\Windows;$(SolutionDir)Library3rdParty\SQFlash\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>

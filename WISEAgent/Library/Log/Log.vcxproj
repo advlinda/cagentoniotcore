@@ -51,7 +51,6 @@
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_LIB;STRICT;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>$(SolutionDir)Platform\Windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>

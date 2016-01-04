@@ -47,7 +47,6 @@
       <FunctionLevelLinking Condition="'$(Configuration)'=='Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
   </ItemDefinitionGroup>

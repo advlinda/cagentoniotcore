@@ -79,7 +79,7 @@
   - Link the library onecoreuap.lib winsysstub.lib 
    (Remove ws2_32.lib gdi32.lib advapi32.lib crypt32.lib user32.lib etc.)
   - Add -DWIN_IOT into CFLAG
-  - Add libpath:/libpath:"../winsysstub.winiotcore/VC2015/bin/" into MLFLAGS
+  - Add /libpath:"../winsysstub.winiotcore/VC2015/bin/" into MLFLAGS
  
   For example:
 		CFLAG= /MD /Ox /O2 /Ob2 -DWIN_IOT ...

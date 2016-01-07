@@ -38,7 +38,7 @@ public:
     using exception_ptr = std::exception_ptr;
 
     UniqueResource(UniqueResource&& rhs) noexcept :
-    res_{ rhs.detach() } {}
+        res_{ rhs.detach() } {}
 
     explicit UniqueResource(R&& res = traits_type::invalid()) noexcept :
         res_{ std::move(res) }

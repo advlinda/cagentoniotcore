@@ -116,5 +116,47 @@ protected:
 
     R res_;
 }; // UniqueResource
+
+template <typename Traits>
+void swap(UniqueResource<Traits>& lhs, UniqueResource<Traits>& rhs) noexcept
+{
+    lhs.swap(rhs);
+} // swap
+
+template <typename Traits>
+bool operator ==(const UniqueResource<Traits>& lhs, const UniqueResource<Traits>& rhs) noexcept
+{
+    return lhs.get() == rhs.get();
+} // ==
+
+template <typename Traits>
+bool operator !=(const UniqueResource<Traits>& lhs, const UniqueResource<Traits>& rhs) noexcept
+{
+    return lhs.get() != rhs.get();
+} // !=
+
+template <typename Traits>
+bool operator <(const UniqueResource<Traits>& lhs, const UniqueResource<Traits>& rhs) noexcept
+{
+    return lhs.get() < rhs.get();
+} // <
+
+template <typename Traits>
+bool operator <=(const UniqueResource<Traits>& lhs, const UniqueResource<Traits>& rhs) noexcept
+{
+    return lhs.get() <= rhs.get();
+} // <=
+
+template <typename Traits>
+bool operator >(const UniqueResource<Traits>& lhs, const UniqueResource<Traits>& rhs) noexcept
+{
+    return lhs.get() > rhs.get();
+} // <
+
+template <typename Traits>
+bool operator >=(const UniqueResource<Traits>& lhs, const UniqueResource<Traits>& rhs) noexcept
+{
+    return lhs.get() >= rhs.get();
+} // <
 } // base
 } // mstc
